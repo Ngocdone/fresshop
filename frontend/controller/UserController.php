@@ -62,8 +62,8 @@ class UserController {
             
             if ($this->userModel->createUser($userData)) {
                 $_SESSION['success'] = "Đăng ký thành công! Vui lòng đăng nhập.";
-                header("Location: ../view/login.php");
-                exit();
+                header('Location: /duan/frontend/?page=login');
+                exit;
             } else {
                 $_SESSION['error'] = "Có lỗi xảy ra, vui lòng thử lại!";
                 header("Location: ../view/register.php");
@@ -87,10 +87,10 @@ class UserController {
                 $_SESSION['email'] = $user['Email'];
                 $_SESSION['fullname'] = $user['TenKhachHang'];
                 $_SESSION['role'] = $user['TrangThai'];
-                if ($user['TrangThai'] == 1) {
-                    header("Location: /duan1/admin/index.php");
+                if ($user['TrangThai'] == 0) {
+                    header("Location: /duan/admin/index.php");
                 } else {
-                    header("Location: /duan1/frontend/index.php");
+                    header("Location: /duan/frontend/index.php");
                 }
                 exit();
             } else {
@@ -103,7 +103,7 @@ class UserController {
     
     public function logout() {
         session_destroy();
-        header("Location: /duan1/frontend/index.php?page=home");
+        header("Location: /duan/frontend/index.php?page=home");
         exit();
     }
 }

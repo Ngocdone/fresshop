@@ -37,11 +37,12 @@ class ProductModel {
     }
 
     // Cập nhật sản phẩm
-    public function updateProduct($id, $TenSanPham, $GiaGoc, $HinhAnh, $MaDanhMuc, $SoLuong, $NgayNhap, $TrangThai) {
-        $sql = "UPDATE sanpham 
-                SET TenSanPham = ?, GiaGoc = ?, HinhAnh = ?, MaDanhMuc = ?, SoLuong = ?, NgayNhap = ?, TrangThai = ?
-                WHERE id = ?";
-        $params = [$TenSanPham, $GiaGoc, $HinhAnh, $MaDanhMuc, $SoLuong, $NgayNhap, $TrangThai, $id];
-        return $this->db->execute($sql, $params);
-    }
+    public function updateProduct($id, $TenSanPham, $GiaGoc, $SoLuong, $HinhAnh, $MaDanhMuc, $TrangThai) {
+    $sql = "UPDATE sanpham 
+            SET TenSanPham = ?, GiaGoc = ?, SoLuong = ?, HinhAnh = ?, MaDanhMuc = ?, TrangThai = ?
+            WHERE id = ?";
+    return Database::getInstance()->execute($sql, [
+        $TenSanPham, $GiaGoc, $SoLuong, $HinhAnh, $MaDanhMuc, $TrangThai, $id
+    ]);
+}
 }

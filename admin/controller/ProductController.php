@@ -83,15 +83,14 @@ class ProductController {
         }
 
         $this->productModel->updateProduct(
-            $id,
-            $data['TenSanPham'],
-            $data['GiaGoc'],
-            $data['SoLuong'],
-            $hinhAnh,
-            $data['NgayNhap'],
-            $data['TrangThai'],
-            $data['id_danhmuc']
-        );
+    $id,
+    $data['TenSanPham'],
+    $data['GiaGoc'],
+    $data['SoLuong'],
+    $hinhAnh,
+    $data['id_danhmuc'],   // ✅ Truyền đúng MaDanhMuc
+    $data['TrangThai']     // ✅ Truyền đúng Trạng thái
+);
 
         header("Location: ?page=product");
         exit;

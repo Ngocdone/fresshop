@@ -309,7 +309,7 @@
                 <a href="?page=thongke"><i>📈</i> Thống kê</a>
             </div>
             <div class="menu-item <?= (($_GET['page'] ?? '') == 'donhang') ? 'active' : '' ?>">
-                <a href="?page=donhang"><i>📋</i> Đơn hàng</a>
+                <a href="index.php?page=orders"><i>📋</i> Đơn hàng</a>
             </div>
             <div class="menu-item">
                 <a href="logout.php"><i>🚪</i> Đăng xuất</a>

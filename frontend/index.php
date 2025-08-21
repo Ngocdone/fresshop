@@ -1,7 +1,9 @@
 <?php
 session_start();
-require_once('view/header.php');
 $page = isset($_GET['page']) ? $_GET['page'] : 'home';
+
+ob_start(); // ✅ Bắt đầu bộ đệm đầu ra – ngăn việc gửi dữ liệu sớm (rất quan trọng)
+require_once('view/header.php'); // OK – giờ có thể ở trên cùng
 switch ($page) {
     case 'home':
         require_once('controller/ProductController.php');
@@ -60,4 +62,5 @@ switch ($page) {
         break;
 }
 require_once('view/footer.php');
+ob_end_flush(); // ✅ Gửi toàn bộ dữ liệu ra sau khi xử lý xong
 ?>
