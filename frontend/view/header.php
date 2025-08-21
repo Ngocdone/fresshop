@@ -132,7 +132,7 @@
             <li><a class="dropdown-item" href="#"><i class="fas fa-user me-2"></i><?php echo $_SESSION['fullname']; ?></a></li>
             <li><a class="dropdown-item" href="#"><i class="fas fa-shopping-cart me-2"></i>Đơn hàng</a></li>
             <li><hr class="dropdown-divider"></li>
-<li><a class="dropdown-item" href="/duan1/frontend/controller/UserController.php?action=logout"><i class="fas fa-sign-out-alt me-2"></i>Đăng xuất</a></li>
+<li><a class="dropdown-item" href="/fresshop/frontend/controller/UserController.php?action=logout"><i class="fas fa-sign-out-alt me-2"></i>Đăng xuất</a></li>
         <?php else: ?>
             <li><a class="dropdown-item" href="?page=login"><i class="fas fa-sign-in-alt me-2"></i>Đăng nhập</a></li>
             <li><a class="dropdown-item" href="?page=register"><i class="fas fa-user-plus me-2"></i>Đăng ký</a></li>
