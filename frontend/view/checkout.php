@@ -24,7 +24,7 @@ $total = 0;
 
 if ($order) {
     $orderId = $order['id'];
-    
+
     // Lấy chi tiết đơn hàng
     $sqlDetails = "SELECT chitietdonhang.*, sanpham.TenSanPham, sanpham.GiaGoc, sanpham.HinhAnh 
                    FROM chitietdonhang 
@@ -64,28 +64,28 @@ if ($total <= 0) {
                         </thead>
                         <tbody>
                             <?php foreach ($cartItems as $item) { ?>
-                            <tr>
-                                <th scope="row">
-                                    <div class="d-flex align-items-center">
-                                        <img src="../public/img/<?= htmlspecialchars($item['HinhAnh']) ?>" 
-                                             class="img-fluid me-5 rounded-circle" 
-                                             style="width: 80px; height: 80px;" 
-                                             alt="<?= htmlspecialchars($item['TenSanPham']) ?>">
-                                    </div>
-                                </th>
-                                <td>
-                                    <p class="mb-0 mt-4"><?= htmlspecialchars($item['TenSanPham']) ?></p>
-                                </td>
-                                <td>
-                                    <p class="mb-0 mt-4"><?= number_format($item['GiaGoc'], 0, ',', '.') ?> ₫</p>
-                                </td>
-                                <td>
-                                    <p class="mb-0 mt-4"><?= $item['SoLuong'] ?></p>
-                                </td>
-                                <td>
-                                    <p class="mb-0 mt-4"><?= number_format($item['GiaGoc'] * $item['SoLuong'], 0, ',', '.') ?> ₫</p>
-                                </td>
-                            </tr>
+                                <tr>
+                                    <th scope="row">
+                                        <div class="d-flex align-items-center">
+                                            <img src="../public/img/<?= htmlspecialchars($item['HinhAnh']) ?>"
+                                                class="img-fluid me-5 rounded-circle" style="width: 80px; height: 80px;"
+                                                alt="<?= htmlspecialchars($item['TenSanPham']) ?>">
+                                        </div>
+                                    </th>
+                                    <td>
+                                        <p class="mb-0 mt-4"><?= htmlspecialchars($item['TenSanPham']) ?></p>
+                                    </td>
+                                    <td>
+                                        <p class="mb-0 mt-4"><?= number_format($item['GiaGoc'], 0, ',', '.') ?> ₫</p>
+                                    </td>
+                                    <td>
+                                        <p class="mb-0 mt-4"><?= $item['SoLuong'] ?></p>
+                                    </td>
+                                    <td>
+                                        <p class="mb-0 mt-4">
+                                            <?= number_format($item['GiaGoc'] * $item['SoLuong'], 0, ',', '.') ?> ₫</p>
+                                    </td>
+                                </tr>
                             <?php } ?>
                         </tbody>
                     </table>
@@ -106,14 +106,17 @@ if ($total <= 0) {
                             </div>
                         </div>
                     </div>
-                    <div class="py-4 mb-4 border-top border-bottom d-flex justify-content-between">
-                        <h5 class="mb-0 ps-4 me-4">Tổng cộng</h5>
-                        <p class="mb-0 pe-4"><?= number_format($total, 0, ',', '.') ?> ₫</p>
-                    </div>  
-                        <button type="submit" class="btn border-secondary rounded-pill px-4 py-3 text-primary text-uppercase mb-4 ms-4">
-                            Thanh toán 
+                    <form action="?page=checkout" method="post">
+                        <div class="py-4 mb-4 border-top border-bottom d-flex justify-content-between">
+                            <h5 class="mb-0 ps-4 me-4">Tổng cộng</h5>
+                            <p class="mb-0 pe-4"><?= number_format($total, 0, ',', '.') ?> ₫</p>
+                        </div>
+                        <button type="submit"
+                            class="btn border-secondary rounded-pill px-4 py-3 text-primary text-uppercase mb-4 ms-4">
+                            Thanh toán
                         </button>
                     </form>
+
                 </div>
             </div>
         </div>

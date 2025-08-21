@@ -1,6 +1,5 @@
 <?php
-require_once('../model/KhachHangModel.php');
-
+require_once __DIR__ . '/../model/KhachHangModel.php';
 $khachHangModel = new KhachHangModel();
 $khachhangs = $khachHangModel->getAllKhachHang();
 ?>

@@ -28,6 +28,10 @@
 /*** Spinner End ***/
 
 
+.checkout-container {
+    margin-top: 200px;
+    height: 100vh;
+}
 /*** Button Start ***/
 .btn {
     font-weight: 600;

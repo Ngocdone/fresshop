@@ -145,30 +145,49 @@ if ($order) {
         <div class="row g-4 justify-content-end">
             <div class="col-8"></div>
             <div class="col-sm-8 col-md-7 col-lg-6 col-xl-4">
-                <div class="bg-light rounded">
-                    <div class="p-4">
-                        <h1 class="display-6 mb-4">giỏ hàng <span class="fw-normal"></span></h1>
-                        <div class="d-flex justify-content-between mb-4">
-                            <h5 class="mb-0 me-4">Tổng cộng:</h5>
-                            <p class="mb-0"><?= number_format($total, 0, ',', '.') ?> ₫</p>
-                        </div>
-                        <div class="d-flex justify-content-between">
-                            <h5 class="mb-0 me-4">Vận chuyển</h5>
-                            <div class="">
-                                <p class="mb-0">Giá cố định: 0 ₫</p>
-                            </div>
-                        </div>
-                        <p class="mb-0 text-end">Vận chuyển đến Việt Nam.</p>
-                    </div>
-                    <div class="py-4 mb-4 border-top border-bottom d-flex justify-content-between">
-                        <h5 class="mb-0 ps-4 me-4">Tổng cộng</h5>
-                        <p class="mb-0 pe-4"><?= number_format($total, 0, ',', '.') ?> ₫</p>
-                    </div>
-                    <a href="?page=payment" class="btn border-secondary rounded-pill px-4 py-3 text-primary text-uppercase mb-4 ms-4">
-                        Thanh toán
-                    </a>
+        <div class="bg-light rounded">
+            <div class="p-4">
+                <h1 class="display-6 mb-4">Cart <span class="fw-normal">Total</span></h1>
+                
+                <!-- Subtotal -->
+                <div class="d-flex justify-content-between mb-2">
+                    <h5 class="mb-0 me-4">Subtotal:</h5>
+                    <p class="mb-0"><?= number_format($total, 0, ',', '.') ?> ₫</p>
+                </div>
+
+                <!-- Shipping -->
+                <div class="d-flex justify-content-between mb-2">
+                    <h5 class="mb-0 me-4">Shipping</h5>
+                    <p class="mb-0">Flat rate: 0 ₫</p>
+                </div>
+                <p class="mb-3 text-end">Shipping to Vietnam.</p>
+
+                <!-- Ghi chú đơn hàng -->
+                <div class="mb-3">
+                    <h5>Ghi chú đơn hàng:</h5>
+                    <p><?= htmlspecialchars($order['Ghichu'] ?? 'Không có ghi chú') ?></p>
                 </div>
             </div>
+
+            <!-- Tổng tiền -->
+            <div class="py-4 mb-4 border-top border-bottom d-flex justify-content-between">
+                <h5 class="mb-0 ps-4 me-4">Total</h5>
+                <p class="mb-0 pe-4"><?= number_format($total, 0, ',', '.') ?> ₫</p>
+            </div>
+
+            <!-- Form thanh toán -->
+            <form method="post" action="index.php?page=checkoutform" class="p-4">
+                <input type="hidden" name="order_id" value="<?= $order['id'] ?>">
+                
+                <div class="mb-3">
+                    <label for="ghichu" class="form-label">Cập nhật ghi chú (nếu cần):</label>
+                    <textarea name="ghichu" id="ghichu" class="form-control" rows="3"><?= htmlspecialchars($order['Ghichu'] ?? '') ?></textarea>
+                </div>
+
+                <button type="submit" class="btn btn-success w-100">Thanh toán</button>
+            </form>
+        </div>
+    </div>
         </div>
     </div>
 </div>

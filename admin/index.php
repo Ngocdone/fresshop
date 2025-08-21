@@ -118,6 +118,17 @@ switch ($page) {
         $khachhangs = $khachhangController->index();
         include 'view/khachhang.php';
         break;
+    case "thongke":
+        require_once 'controller/StatisticsController.php';
+        try {
+            $statisticsController = new StatisticsController();
+            $data = $statisticsController->index();
+            include 'view/statistics.php';
+        } catch (Exception $e) {
+            echo "<div class='alert alert-danger'>Không thể tải dữ liệu thống kê: " . $e->getMessage() . "</div>";
+        }
+        break;
+        
     default:
         echo "<h2>Trang không tồn tại</h2>";
         break;

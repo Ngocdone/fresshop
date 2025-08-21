@@ -315,6 +315,5 @@
                 <a href="logout.php"><i>🚪</i> Đăng xuất</a>
             </div>
         </div>
-<i>🚪</i> Đăng xuất
         <!-- Main content start -->
         <div class="main-content">

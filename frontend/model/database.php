@@ -1,5 +1,6 @@
 <?php
-class Database{
+class Database
+{
     private $host = "localhost";
     private $username = "root";
     private $password = "";
@@ -7,43 +8,51 @@ class Database{
     private $conn;
 
     public static $instance;
-    public static function getInstance(){
-        if(!self::$instance){
+    public static function getInstance()
+    {
+        if (!self::$instance) {
             self::$instance = new Database();
         }
         return self::$instance;
     }
 
-    public function __construct(){
-        try{
+    public function __construct()
+    {
+        try {
             $this->conn = new PDO("mysql:host=$this->host;dbname=$this->database", $this->username, $this->password);
             $this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         } catch (PDOException $e) {
             error_log("Connection failed: " . $e->getMessage()); // Log lỗi kết nối
-            echo "Connection failed: ".$e->getMessage();
+            echo "Connection failed: " . $e->getMessage();
         }
     }
 
     // Dùng cho câu lệnh SQL dạng INSERT, UPDATE hoặc DELETE
-    public function execute($sql,$param = []){
+    public function execute($sql, $param = [])
+    {
         $stmt = $this->conn->prepare($sql);
         return $stmt->execute($param);
     }
     //Dùng cho câu lệnh SELECT
-    public function getAll($sql){
+    public function getAll($sql)
+    {
         $stmt = $this->conn->prepare($sql);
         $stmt->execute();
         return $stmt->fetchAll();
     }
 
-    public function getOne($sql){
+    public function getOne($sql, $params = [])
+    {
         $stmt = $this->conn->prepare($sql);
-        $stmt->execute();
+        $stmt->execute($params);  // truyền giá trị vào đây
         return $stmt->fetch();
     }
 
+
+
     // Hàm public để lấy kết nối PDO
-    public function getConnection() {
+    public function getConnection()
+    {
         return $this->conn;
     }
 }

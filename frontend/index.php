@@ -50,12 +50,15 @@ switch ($page) {
     case 'header':
         require_once('view/header.php');
         break;
-    case 'payment':
+    case 'checkoutform':   // xử lý thanh toán => redirect
         require_once('controller/PaymentSuccessController.php');
-        $paymentSuccessController = new PaymentSuccessController();
-        $paymentSuccessController->showSuccessPage();
-        // echo "hello";
-        // require_once('view/paymentSuccess.php');
+        $orderController = new OrderController();
+        $orderController->checkout();
+        break;
+    case 'orderSuccess':   // cảm ơn
+        require_once('controller/PaymentSuccessController.php');
+        $orderController = new OrderController();
+        $orderController->orderSuccess();
         break;
     default:
         echo "Không tồn tại trang đó";
@@ -63,4 +66,3 @@ switch ($page) {
 }
 require_once('view/footer.php');
 ob_end_flush(); // ✅ Gửi toàn bộ dữ liệu ra sau khi xử lý xong
-?>
