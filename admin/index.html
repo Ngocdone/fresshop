@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #ffffffff;
+        }
+
+        .admin-container {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        /* Sidebar Menu */
+        .sidebar {
+            width: 250px;
+            background: linear-gradient(135deg, #ffffffff 0%, #000000ff 100%);
+            color: white;
+            padding: 20px 0;
+            box-shadow: 2px 0 10px rgba(0, 0, 0, 1);
+        }
+
+        .logo {
+            text-align: center;
+            padding: 20px;
+            border-bottom: 1px solid rgba(0, 0, 0, 1);
+            margin-bottom: 20px;
+        }
+
+        .logo h2 {
+            font-size: 24px;
+            font-weight: 300;
+            color: #000000ff;
+        }
+
+        .menu-item {
+            padding: 15px 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border-left: 3px solid transparent;
+            
+        }
+
+        .menu-item:hover {
+            background-color: rgba(255,255,255,0.1);
+            border-left-color: #fff;
+        }
+
+        .menu-item.active {
+            background-color: rgba(255,255,255,0.2);
+            border-left-color: #fff;
+        }
+
+        .menu-item i {
+            margin-right: 10px;
+            width: 20px;
+            color: white;
+            text-shadow: 0 0 8px rgba(255, 255, 255, 0.6);
+            transition: all 0.3s ease;
+        }
+
+        .menu-item:hover i {
+            text-shadow: 0 0 15px rgba(255, 255, 255, 0.9),
+                         0 0 25px rgba(255, 255, 255, 0.7),
+                         0 0 35px rgba(255, 255, 255, 0.5);
+            filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.8));
+        }
+
+        /* Main Content */
+        .main-content {
+            flex: 1;
+            padding: 20px;
+        }
+
+        .header {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 1);
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header h1 {
+            color: rgba(0, 0, 0, 1);
+            font-size: 28px;
+            font-weight: 300;
+        }
+
+        .header-actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #00d9ff 0%, #9b1690 100%);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgb(0, 47, 255);
+        }
+
+        /* Product Table */
+        .table-container {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 1);
+            overflow: hidden;
+        }
+
+        .table-header {
+            padding: 20px;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .table-header h3 {
+            color: #333;
+            font-size: 20px;
+            font-weight: 500;
+        }
+
+        .search-box {
+            padding: 8px 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            outline: none;
+            font-size: 14px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid #eee;
+        }
+
+        th {
+            background-color: #f8f9fa;
+            font-weight: 600;
+            color: #000000b4;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        td {
+            font-size: 14px;
+            color: #666;
+        }
+
+        tr:hover {
+            background-color: #f8f9fa;
+        }
+
+        .product-img {
+            width: 50px;
+            height: 50px;
+            border-radius: 5px;
+            object-fit: cover;
+        }
+
+        .status {
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 500;
+        }
+
+        .status.active {
+            background-color: #d4edda;
+            color: #155724;
+        }
+
+        .status.inactive {
+            background-color: #f8d7da;
+            color: #721c24;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 5px;
+        }
+
+        .btn-sm {
+            padding: 5px 10px;
+            font-size: 12px;
+            border-radius: 3px;
+        }
+
+        .btn-edit {
+            background-color: #ffc107;
+            color: white;
+        }
+
+        .btn-delete {
+            background-color: #dc3545;
+            color: white;
+        }
+
+        .btn-view {
+            background-color: #17a2b8;
+            color: white;
+        }
+
+        .pagination {
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            gap: 5px;
+        }
+
+        .page-btn {
+            padding: 8px 12px;
+            border: 1px solid #ddd;
+            background: white;
+            cursor: pointer;
+            border-radius: 3px;
+        }
+
+        .page-btn.active {
+            background: linear-gradient(135deg, #088118b9 0%, #764ba2 100%);
+            color: white;
+            border-color: #02b90b;
+        }
+
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .admin-container {
+                flex-direction: column;
+            }
+            
+            .sidebar {
+                width: 100%;
+                height: auto;
+            }
+            
+            .header {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+    .main-content {
+        padding: 30px;
+    }
+    .product-img, img.rounded {
+        object-fit: cover;
+        border-radius: 8px;
+    }
+    .btn-sm {
+        padding: 5px 10px;
+    }
+
+        }
+    </style>
+</head>
+<body>
+    <div class="admin-container">
+        <!-- Sidebar Menu -->
+                <div class="sidebar">
+            <div class="logo">
+                <h2>Admin Panel</h2>
+            </div>
+            <div class="menu-item active">
+                <i>📊</i> Dashboard
+            </div>
+            <div class="menu-item">
+                <i>📦</i> Sản phẩm
+            </div>
+            <div class="menu-item">
+                <i>👤</i> Khách hàng
+            </div>
+            <div class="menu-item">
+                <i>🛍</i> Đơn hàng
+            </div>            
+            <div class="menu-item">
+                <i>📈</i> Thống kê
+            </div>
+            <div class="menu-item">
+                <i>⚙️</i> Cài đặt
+            </div>
+            <div class="menu-item">
+                <i>🚪</i> Đăng xuất
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <!-- Header -->
+            <div class="header">
+                <h1>Quản lý danh mục</h1>
+                <div class="header-actions">
+                    <button class="btn btn-primary">+ Thêm danh mục</button>
+                    <button class="btn btn-primary">📤 Xuất Excel</button>
+                </div>
+            </div>
+
+            <!-- Product Table -->
+<!-- Header -->
+
+
+    <!-- Table Danh Mục -->
+    <div class="table-container">
+        <div class="table-header d-flex justify-content-between align-items-center mb-3">
+            <h3>Danh sách danh mục</h3>
+            <input type="text" class="form-control w-25" placeholder="Tìm kiếm danh mục...">
+        </div>
+
+        <table class="table table-bordered text-center align-middle">
+            <thead class="table-light">
+                <tr>
+                    <th>ID</th>
+                    <th>Tên danh mục</th>
+                    <th>Hình ảnh</th>
+                    <th>Hành động</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>#001</td>
+                    <td>Điện thoại</td>
+                    <td><img src="https://via.placeholder.com/60" alt="Điện thoại" width="60" class="rounded"></td>
+                    <td>
+                        <button class="btn btn-sm btn-primary">✎</button>
+                        <button class="btn btn-sm btn-danger">✕</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>#002</td>
+                    <td>Laptop</td>
+                    <td><img src="https://via.placeholder.com/60" alt="Laptop" width="60" class="rounded"></td>
+                    <td>
+                        <button class="btn btn-sm btn-primary">✎</button>
+                        <button class="btn btn-sm btn-danger">✕</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>#003</td>
+                    <td>Phụ kiện</td>
+                    <td><img src="https://via.placeholder.com/60" alt="Phụ kiện" width="60" class="rounded"></td>
+                    <td>
+                        <button class="btn btn-sm btn-primary">✎</button>
+                        <button class="btn btn-sm btn-danger">✕</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <!-- Pagination -->
+        <div class="pagination d-flex justify-content-center mt-4">
+            <button class="btn btn-outline-primary me-2">« Trước</button>
+            <button class="btn btn-primary me-2">1</button>
+            <button class="btn btn-outline-primary me-2">2</button>
+            <button class="btn btn-outline-primary">Tiếp »</button>
+        </div>
+    </div>
+        </div>
+        </div>
+    </div>
+
+    <script>
+        // Add some basic interactivity
+        document.querySelectorAll('.menu-item').forEach(item => {
+            item.addEventListener('click', function() {
+                document.querySelector('.menu-item.active').classList.remove('active');
+                this.classList.add('active');
+            });
+        });
+
+        document.querySelectorAll('.page-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                if (!this.textContent.includes('«') && !this.textContent.includes('»')) {
+                    document.querySelector('.page-btn.active').classList.remove('active');
+                    this.classList.add('active');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
