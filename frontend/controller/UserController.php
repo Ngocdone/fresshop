@@ -62,7 +62,7 @@ class UserController {
             
             if ($this->userModel->createUser($userData)) {
                 $_SESSION['success'] = "Đăng ký thành công! Vui lòng đăng nhập.";
-                header('Location: /duan/frontend/?page=login');
+                header('Location: /fresshop/frontend/?page=login');
                 exit;
             } else {
                 $_SESSION['error'] = "Có lỗi xảy ra, vui lòng thử lại!";
@@ -88,9 +88,9 @@ class UserController {
                 $_SESSION['fullname'] = $user['TenKhachHang'];
                 $_SESSION['role'] = $user['TrangThai'];
                 if ($user['TrangThai'] == 0) {
-                    header("Location: /duan/admin/index.php");
+                    header("Location: /fresshop/admin/index.php");
                 } else {
-                    header("Location: /duan/frontend/index.php");
+                    header("Location: /fresshop/frontend/index.php");
                 }
                 exit();
             } else {
@@ -103,7 +103,7 @@ class UserController {
     
     public function logout() {
         session_destroy();
-        header("Location: /duan/frontend/index.php?page=home");
+        header("Location: /fresshop/frontend/index.php?page=home");
         exit();
     }
 }

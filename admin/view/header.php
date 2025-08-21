@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,7 +9,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="public/css/admin.css">
     <link rel="stylesheet" href="/duan1/public/css/admin.css">
- <!-- Chứa toàn bộ CSS bạn đã viết -->
+    <!-- Chứa toàn bộ CSS bạn đã viết -->
     <style>
         * {
             margin: 0;
@@ -53,16 +54,16 @@
             cursor: pointer;
             transition: all 0.3s ease;
             border-left: 3px solid transparent;
-            
+
         }
 
         .menu-item:hover {
-            background-color: rgba(255,255,255,0.2);
+            background-color: rgba(255, 255, 255, 0.2);
             border-left-color: #fff;
         }
 
         .menu-item.active {
-            background-color: rgba(255,255,255,0.2);
+            background-color: rgba(255, 255, 255, 0.2);
             border-left-color: #fff;
         }
 
@@ -71,13 +72,13 @@
             width: 20px;
             color: white;
             text-shadow: 0 0 15px rgba(255, 255, 255, 0.9),
-            transition: all 0.3s ease;
+                transition: all 0.3s ease;
         }
 
         .menu-item:hover i {
             text-shadow: 0 0 15px rgba(255, 255, 255, 0.9),
-                         0 0 25px rgba(255, 255, 255, 0.7),
-                         0 0 35px rgba(255, 255, 255, 0.5);
+                0 0 25px rgba(255, 255, 255, 0.7),
+                0 0 35px rgba(255, 255, 255, 0.5);
             filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.8));
         }
 
@@ -163,7 +164,8 @@
             border-collapse: collapse;
         }
 
-        th, td {
+        th,
+        td {
             padding: 15px;
             text-align: left;
             border-bottom: 1px solid #eee;
@@ -264,31 +266,35 @@
             .admin-container {
                 flex-direction: column;
             }
-            
+
             .sidebar {
                 width: 100%;
                 height: auto;
             }
-            
+
             .header {
                 flex-direction: column;
                 gap: 15px;
             }
-            
-    .main-content {
-        padding: 30px;
-    }
-    .product-img, img.rounded {
-        object-fit: cover;
-        border-radius: 8px;
-    }
-    .btn-sm {
-        padding: 5px 10px;
-    }
+
+            .main-content {
+                padding: 30px;
+            }
+
+            .product-img,
+            img.rounded {
+                object-fit: cover;
+                border-radius: 8px;
+            }
+
+            .btn-sm {
+                padding: 5px 10px;
+            }
 
         }
     </style>
 </head>
+
 <body>
     <div class="admin-container">
         <!-- Sidebar -->
@@ -312,7 +318,7 @@
                 <a href="index.php?page=orders"><i>📋</i> Đơn hàng</a>
             </div>
             <div class="menu-item">
-                <a href="logout.php"><i>🚪</i> Đăng xuất</a>
+                <a href="?page=logout"><i>🚪</i> Đăng xuất</a>
             </div>
         </div>
         <!-- Main content start -->

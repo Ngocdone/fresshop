@@ -1,19 +1,23 @@
 <?php
 require_once __DIR__ . '/../model/KhachHangModel.php';
 
-class KhachHangController {
+class KhachHangController
+{
     private $model;
 
-    public function __construct() {
+    public function __construct()
+    {
         $this->model = new KhachHangModel();
     }
 
-    public function index() {
+    public function index()
+    {
         $khachhangs = $this->model->getAllKhachHang();
         return $khachhangs;
     }
 
-    public function edit($id) {
+    public function edit($id)
+    {
         $khachhang = $this->model->getKhachHangById($id);
         if (!$khachhang) {
             header('Location: index.php?page=khachhang');
@@ -22,15 +26,24 @@ class KhachHangController {
         include __DIR__ . '/../view/edit_khachhang.php';
     }
 
-    public function update($id, $data) {
+    public function update($id, $data)
+    {
         $this->model->updateKhachHang($id, $data);
         header('Location: index.php?page=khachhang');
         exit();
     }
 
-    public function delete($id) {
+    public function delete($id)
+    {
         $this->model->deleteKhachHang($id);
         header('Location: index.php?page=khachhang');
+        exit();
+    }
+    public function logout()
+    {
+
+        session_destroy();
+        header("Location: /fresshop/frontend/index.php");
         exit();
     }
 }
@@ -46,7 +59,8 @@ switch ($action) {
         $controller->index();
         break;
     case 'edit':
-        if ($id) $controller->edit($id);
+        if ($id)
+            $controller->edit($id);
         break;
     case 'update':
         if ($id && $_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -62,7 +76,8 @@ switch ($action) {
         }
         break;
     case 'delete':
-        if ($id) $controller->delete($id);
+        if ($id)
+            $controller->delete($id);
         break;
     default:
         $controller->index();

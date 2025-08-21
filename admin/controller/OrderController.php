@@ -7,7 +7,7 @@ class OrderController {
         $db   = Database::getInstance();       // dùng Singleton
         $conn = $db->getConnection();          // lấy PDO connection
 
-        $sql = "SELECT dh.id, kh.TenKhachHang, kh.Email, kh.SDT, dh.TrangThaiThanhToan, dh.Ghichu
+        $sql = "SELECT dh.id, kh.TenKhachHang, kh.Email, kh.SDT, dh.TrangThaiThanhToan, dh.GhiChuDonHang
                 FROM donhang dh
                 JOIN khachhang kh ON dh.MaKhachHang = kh.id
                 ORDER BY dh.id DESC";

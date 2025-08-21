@@ -1,12 +1,14 @@
 <?php
+session_start();
 require_once('controller/CategoryController.php');
 require_once('controller/ProductController.php');
 
 $categoryController = new CategoryController();
-$productController  = new ProductController();
+$productController = new ProductController();
 
 // Ép $page về chữ thường để tránh phân biệt hoa/thường
 $page = strtolower($_GET['page'] ?? 'category');
+ob_start(); // Bắt đầu bộ đệm đầu ra
 
 // ==== Xử lý POST ====
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -128,17 +130,38 @@ switch ($page) {
             echo "<div class='alert alert-danger'>Không thể tải dữ liệu thống kê: " . $e->getMessage() . "</div>";
         }
         break;
-        
+
+    // ===== ĐƠN HÀNG =====
+    case 'orders':
+        require_once 'controller/OrderController.php';
+        $orderController = new OrderController();
+        $orderController->index();
+        break;
+
+    case 'order_detail':
+        require_once 'controller/OrderController.php';
+        $orderController = new OrderController();
+        $id = $_GET['id'] ?? 0;
+        $orderController->detail($id);
+        break;
+    case 'logout':
+        // Xử lý đăng xuất
+        require_once 'controller/KhachHangController.php';
+        $authController = new KhachHangController();
+        $authController->logout();
+        break;
+    // ===== KHÁCH HÀNG =====
+
     default:
         echo "<h2>Trang không tồn tại</h2>";
         break;
+
 }
 
 require_once('view/footer.php');
 // ==== XỬ LÝ TRƯỚC KHI XUẤT HTML ====
 
 // Lấy page
-$page = strtolower($_GET['page'] ?? 'category');
 
 // Complete order (xóa đơn hàng)
 if ($page === 'completeorder') {
@@ -165,8 +188,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             if (!empty($_FILES['HinhAnh']['name'])) {
                 move_uploaded_file($_FILES['HinhAnh']['tmp_name'], "../public/img/" . $data['HinhAnh']);
             }
-            if ($page === 'addcate') $categoryController->addCategory($data);
-            else $categoryController->updateCate($data);
+            if ($page === 'addcate')
+                $categoryController->addCategory($data);
+            else
+                $categoryController->updateCate($data);
             header("Location: index.php?page=category");
             exit;
 
@@ -180,8 +205,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             if (!empty($_FILES['HinhAnh']['name'])) {
                 move_uploaded_file($_FILES['HinhAnh']['tmp_name'], "../public/img/" . $data['HinhAnh']);
             }
-            if ($page === 'addproduct') $productController->addProduct($data, $_FILES);
-            else $productController->updateProduct($data, $_FILES);
+            if ($page === 'addproduct')
+                $productController->addProduct($data, $_FILES);
+            else
+                $productController->updateProduct($data, $_FILES);
             header("Location: index.php?page=product");
             exit;
     }
@@ -210,78 +237,4 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     }
 }
 
-// ==== INCLUDE HEADER ====
-require_once('view/header.php');
-
-// ==== XỬ LÝ SWITCH GIAO DIỆN ====
-switch ($page) {
-    // ===== DANH MỤC =====
-    case 'category':
-        require_once 'controller/CategoryController.php';
-        $categoryController = new CategoryController();
-        $categoryController->renderCategory();
-        break;
-
-    case 'showaddcate':
-        require_once 'controller/CategoryController.php';
-        $categoryController = new CategoryController();
-        $categoryController->renderAddCate();
-        break;
-
-    case 'editcate':
-        require_once 'controller/CategoryController.php';
-        $categoryController = new CategoryController();
-        $id = $_GET['id'] ?? null;
-        if ($id) $categoryController->editCate($id);
-        break;
-
-    // ===== SẢN PHẨM =====
-    case 'product':
-        require_once 'controller/ProductController.php';
-        $productController = new ProductController();
-        $productController->renderProductList();
-        break;
-
-    case 'showaddproduct':
-        require_once 'controller/ProductController.php';
-        $productController = new ProductController();
-        $productController->renderAddProduct();
-        break;
-
-    case 'editproduct':
-        require_once 'controller/ProductController.php';
-        $productController = new ProductController();
-        $id = $_GET['id'] ?? null;
-        if ($id) $productController->renderEditProduct($id);
-        break;
-
-    // ===== ĐƠN HÀNG =====
-    case 'orders':
-        require_once 'controller/OrderController.php';
-        $orderController = new OrderController();
-        $orderController->index();
-        break;
-
-    case 'order_detail':
-        require_once 'controller/OrderController.php';
-        $orderController = new OrderController();
-        $id = $_GET['id'] ?? 0;
-        $orderController->detail($id);
-        break;
-
-    // ===== KHÁCH HÀNG =====
-    case "khachhang":
-        require_once 'controller/KhachHangController.php';
-        $khachhangController = new KhachHangController();
-        $khachhangs = $khachhangController->index();
-        include 'view/khachhang.php';
-        break;
-
-    default:
-        echo "<h2>Trang không tồn tại</h2>";
-        break;
-}
-
-// ==== INCLUDE FOOTER ====
-require_once('view/footer.php');
 ?>
