@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="public/css/admin.css">
     <link rel="stylesheet" href="/duan1/public/css/admin.css">
     <!-- Chứa toàn bộ CSS bạn đã viết -->
-    <style>
+     <style>
         * {
             margin: 0;
             padding: 0;
@@ -19,7 +19,7 @@
 
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #ffffffff;
+            background-color: rgb(255, 253, 253);
         }
 
         .admin-container {
@@ -30,10 +30,10 @@
         /* Sidebar Menu */
         .sidebar {
             width: 250px;
-            background: linear-gradient(135deg, #ffffffff 0%, #000000ff 100%);
+            background: linear-gradient(135deg, rgba(4, 255, 46, 0.897) 0%, rgb(146, 146, 146) 100%);
             color: white;
             padding: 20px 0;
-            box-shadow: 2px 0 10px rgba(0, 0, 0, 1);
+            box-shadow: 2px 0 10px rgba(0, 59, 10, 0.897);
         }
 
         .logo {
@@ -54,16 +54,16 @@
             cursor: pointer;
             transition: all 0.3s ease;
             border-left: 3px solid transparent;
-
+            
         }
 
         .menu-item:hover {
-            background-color: rgba(255, 255, 255, 0.2);
+            background-color: rgba(0, 0, 0, 0.9);
             border-left-color: #fff;
         }
 
         .menu-item.active {
-            background-color: rgba(255, 255, 255, 0.2);
+            background-color: rgba(255,255,255,0.2);
             border-left-color: #fff;
         }
 
@@ -71,14 +71,14 @@
             margin-right: 10px;
             width: 20px;
             color: white;
-            text-shadow: 0 0 15px rgba(255, 255, 255, 0.9),
-                transition: all 0.3s ease;
+            text-shadow: 0 0 8px rgba(255, 255, 255, 0.6);
+            transition: all 0.3s ease;
         }
 
         .menu-item:hover i {
             text-shadow: 0 0 15px rgba(255, 255, 255, 0.9),
-                0 0 25px rgba(255, 255, 255, 0.7),
-                0 0 35px rgba(255, 255, 255, 0.5);
+                         0 0 25px rgba(255, 255, 255, 0.7),
+                         0 0 35px rgba(255, 255, 255, 0.5);
             filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.8));
         }
 
@@ -92,7 +92,7 @@
             background: white;
             padding: 20px;
             border-radius: 10px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 1);
+            box-shadow: 0 2px 10px rgba(4, 255, 46, 0.897);
             margin-bottom: 20px;
             display: flex;
             justify-content: space-between;
@@ -133,7 +133,7 @@
         .table-container {
             background: white;
             border-radius: 10px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 1);
+            box-shadow: 0 2px 10px rgba(4, 255, 46, 0.897);
             overflow: hidden;
         }
 
@@ -164,8 +164,7 @@
             border-collapse: collapse;
         }
 
-        th,
-        td {
+        th, td {
             padding: 15px;
             text-align: left;
             border-bottom: 1px solid #eee;
@@ -266,30 +265,27 @@
             .admin-container {
                 flex-direction: column;
             }
-
+            
             .sidebar {
                 width: 100%;
                 height: auto;
             }
-
+            
             .header {
                 flex-direction: column;
                 gap: 15px;
             }
-
-            .main-content {
-                padding: 30px;
-            }
-
-            .product-img,
-            img.rounded {
-                object-fit: cover;
-                border-radius: 8px;
-            }
-
-            .btn-sm {
-                padding: 5px 10px;
-            }
+            
+    .main-content {
+        padding: 30px;
+    }
+    .product-img, img.rounded {
+        object-fit: cover;
+        border-radius: 8px;
+    }
+    .btn-sm {
+        padding: 5px 10px;
+    }
 
         }
     </style>
